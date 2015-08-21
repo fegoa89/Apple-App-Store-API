@@ -55,9 +55,19 @@ Rails.application.routes.draw do
   #   end
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
-      resources :categories do
-        root 'categories#show'
+
+      resources :top_apps do
+        root 'top_apps#show'
       end
+
+      resources :publishers_ranking do
+        root 'publishers_ranking#show'
+      end
+
+      resources :app_by_rank_position do
+        root 'app_by_rank_position#show'
+      end
+
     end
   end
 end
