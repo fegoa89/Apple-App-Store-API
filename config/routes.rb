@@ -55,7 +55,9 @@ Rails.application.routes.draw do
   #   end
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
-      resources :categories
+      resources :categories do
+        root 'categories#show'
+      end
     end
   end
 end
