@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
+
     def accepted_params
       params.permit(:category_id, :monetization, :rank_position)
     end

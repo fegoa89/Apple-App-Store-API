@@ -1,1 +1,0 @@
-json.set! :params, params

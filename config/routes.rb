@@ -53,21 +53,30 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  # namespace :api, defaults: { format: 'json' } do
+  #   namespace :v1 do
+
+  #     resources :top_apps do
+  #       root 'top_apps#show'
+  #     end
+
+  #     resources :publishers_ranking do
+  #       root 'publishers_ranking#show'
+  #     end
+
+  #     resources :app_by_rank_position do
+  #       root 'app_by_rank_position#show'
+  #     end
+
+  #   end
+  # end
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
-
-      resources :top_apps do
-        root 'top_apps#show'
-      end
-
-      resources :publishers_ranking do
-        root 'publishers_ranking#show'
-      end
-
-      resources :app_by_rank_position do
-        root 'app_by_rank_position#show'
-      end
-
+        controller :categories do
+          get '/categories/top_apps' => 'categories#top_apps'
+          get '/categories/publishers_ranking' => 'categories#publishers_ranking'
+          get '/categories/app_by_ranking_position' => 'categories#app_by_ranking_position'
+        end
     end
   end
 end
