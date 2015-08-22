@@ -3,16 +3,26 @@ module Api
     class CategoriesController < ApplicationController
 
       def top_apps
-      	binding.pry
+        if top_apps_request.valid?
+          @result = top_apps_request.perform_request
+        else
+          render_error(top_apps_request.errors.messages)
+        end
       end
 
       def publishers_ranking
-      	binding.pry
+
       end
 
       def app_by_ranking_position
-      	binding.pry
+
       end
+
+      private
+
+        def top_apps_request
+          @app ||= TopAppsRequest.new(accepted_params)
+        end
 
     end
   end
