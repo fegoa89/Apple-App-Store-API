@@ -16,6 +16,10 @@ module Response
       !response.body.include?("failureType")
     end
 
+    def error
+      { error: 400, message: "Bad Request" }
+    end
+
     def top_charts_for_monetization
       top_charts_array[monetization_array_position]["adamIds"]
     end

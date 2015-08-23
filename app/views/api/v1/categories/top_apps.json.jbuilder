@@ -1,1 +1,1 @@
-json.set! :params, @result
+json.set! :response, @result

@@ -15,7 +15,7 @@ module Client
     private
     
       def apple_store_client_request
-        @response ||= RestClient.get request_configuration.request_url, request_configuration.apple_store_header
+        @response ||= RestClient.get request_configuration.apple_store_url, request_configuration.apple_store_header
       end
 
       def request_configuration

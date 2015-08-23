@@ -11,20 +11,15 @@ module Request
       apple_store_header_configuration
     end
 
-    def request_url
-      apple_store_url + apple_store_params
-    end
-
     def apple_store_url
-      client_configuration.urls["apple_store"]
+      client_configuration.urls["apple_store"] + apple_store_params
     end
 
     def apple_lookup_url
-      client_configuration.urls["apple_lookup"]
+      client_configuration.urls["apple_lookup"] + apple_lookup_ids
     end
 
     private
-
 
       def build_params_hash
         {
@@ -37,6 +32,10 @@ module Request
 
       def apple_store_params
         build_params_hash.map { |k, v| "#{k}=#{v}" }.join("&")
+      end
+
+      def apple_lookup_ids
+        "id=#{params[:ids].join(',')}"
       end
 
       def apple_store_header_configuration
