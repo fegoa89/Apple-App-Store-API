@@ -13,8 +13,16 @@ class ApplicationController < ActionController::Base
       {
         error:          400,
         requested_path: "#{self.action_name}",
-        message:        "Params #{messages.keys.join(", ")} must be present"
+        error_message:  detailed_errors(messages)
       }
+    end
+
+    def detailed_errors(errors)
+      error_string = ""
+      errors.each do |k, v|
+        error_string << "Parameter #{k} #{v.first} ."
+      end
+      error_string
     end
 
     def accepted_params

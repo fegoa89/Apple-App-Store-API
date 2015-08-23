@@ -44,7 +44,7 @@ module Request
           user_agent:          header_configuration["user_agent"],
           cache_control:       header_configuration["cache_control"],
           accept_language:     header_configuration["accept_language"],
-          accept_enconding:    header_configuration["accept_enconding"],
+          accept_encoding:     header_configuration["accept_encoding"],
           x_apple_store_front: header_configuration["x_apple_store_front"]
         }
       end
