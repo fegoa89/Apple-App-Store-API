@@ -43,7 +43,7 @@ describe Response::AppleStoreResponse do
 
     describe "error" do
 
-      it "returns an array with an error" do
+      it "returns a hash with an error" do
         expect(subject.error).to eq( { error: 400, message: "Bad Request" } )
       end
     end

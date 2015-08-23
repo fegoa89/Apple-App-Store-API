@@ -16,11 +16,18 @@ module Response
     end
 
     def error
-      { error: response.http_code, message: JSON.parse(response.http_body)["errorMessage"] }
+      { error: extract_error_code, message: extract_error_message }
     end
 
 
     private
+      def extract_error_code
+        response.http_code == nil ? 400 : response.http_code
+      end
+
+      def extract_error_message
+        JSON.parse(response.http_body)["errorMessage"] rescue "Bad Request"
+      end
 
       def json_response_with_results_metadata
         json_response = []
