@@ -13,7 +13,7 @@ module Response
     def valid?
       # when a invalid request is performed, it returns and XML response
       # that determines the error failureType
-      !response.body.include?("failureType")
+      !response.include?("failureType")
     end
 
     def error

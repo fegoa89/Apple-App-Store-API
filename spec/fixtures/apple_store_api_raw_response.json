@@ -1,0 +1,35 @@
+{
+"topCharts":[
+    {"adamIds":
+    [
+    "357828853",
+    "1023209668",
+    "669198374"],
+    "seeAllUrl":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTop?cc=us&genreId=6011&popId=30",
+    "kinds": {"iosSoftware":true},
+    "shortTitle":"Paid",
+    "id":"30",
+    "title":"Top Paid iPhone Apps",
+    "isTracklistChart":false},
+    {"adamIds":
+    [
+    "234442342",
+    "9657867",
+    "4246467890"],
+    "seeAllUrl":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTop?cc=us&genreId=6011&popId=30",
+    "kinds": {"iosSoftware":true},
+    "shortTitle":"Free",
+    "id":"30",
+    "title":"Top Free iPhone Apps",
+    "isTracklistChart":false},
+    {"adamIds":
+    [
+    "2358067",
+    "6453279",
+    "186796"],
+    "seeAllUrl":"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTop?cc=us&genreId=6011&popId=30",
+    "kinds": {"iosSoftware":true},
+    "shortTitle":"Grossing",
+    "id":"30",
+    "title":"Top Grossing iPhone Apps",
+    "isTracklistChart":false}]}
