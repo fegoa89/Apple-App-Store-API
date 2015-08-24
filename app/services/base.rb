@@ -40,7 +40,7 @@ class Base
     end
 
     def get_top_apps_from_apple_store
-      @apple_store_result  ||= Client::AppleStoreApi.new(self.category_id, self.monetization).get_top_apps
+      @apple_store_result   ||= Client::AppleStoreApi.new(self.category_id, self.monetization).get_top_apps
     end
 
     def top_charts_for_monetization_type
@@ -64,7 +64,7 @@ class Base
     end
 
     def get_app_metadata
-      @apple_lookup_result ||= Client::AppleLookupApi.new( top_charts_for_monetization_type ).get_apps_metadata
+      @apple_lookup_result   ||= Client::AppleLookupApi.new( top_charts_for_monetization_type ).get_apps_metadata
     end
 
 end
