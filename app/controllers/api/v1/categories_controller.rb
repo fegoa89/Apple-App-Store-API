@@ -15,13 +15,21 @@ module Api
       end
 
       def app_by_ranking_position
-
+        if app_ranking_position.valid?
+          @result = app_ranking_position.perform_request
+        else
+          render_error(app_ranking_position.errors.messages)
+        end
       end
 
       private
 
         def top_apps_request
-          @app ||= TopAppsRequest.new(accepted_params)
+          @top_apps ||= TopAppsRequest.new(accepted_params)
+        end
+
+        def app_ranking_position
+          @app_ranking ||= AppRankingPosition.new(accepted_params)
         end
 
     end
