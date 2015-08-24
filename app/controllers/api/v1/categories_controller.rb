@@ -10,15 +10,20 @@ module Api
         end
       end
 
-      def publishers_ranking
-
-      end
-
       def app_by_ranking_position
         if app_ranking_position.valid?
           @result = app_ranking_position.perform_request
         else
           render_error(app_ranking_position.errors.messages)
+        end
+      end
+
+
+      def publishers_ranking
+        if publishers_ranking_request.valid?
+          @result = publishers_ranking_request.perform_request
+        else
+          render_error(publishers_ranking_request.errors.messages)
         end
       end
 
@@ -30,6 +35,10 @@ module Api
 
         def app_ranking_position
           @app_ranking ||= AppRankingPosition.new(accepted_params)
+        end
+
+        def publishers_ranking_request
+          @pub_ranking ||= PublishersRanking.new(accepted_params)
         end
 
     end

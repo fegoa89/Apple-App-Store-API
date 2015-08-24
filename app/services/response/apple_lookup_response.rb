@@ -19,6 +19,10 @@ module Response
       { error: extract_error_code, message: extract_error_message }
     end
 
+    def get_publishers_ranking
+      build_ranking_response
+    end
+
 
     private
       def extract_error_code
@@ -46,9 +50,14 @@ module Response
           description:         result["description"],
           version_number:      result["version"],
           publisher_name:      result["artistName"],
+          publisher_id:        result["artistId"],
           small_icon_url:      result["artworkUrl60"],
           average_user_rating: result["averageUserRating"]
         }
+      end
+
+      def build_ranking_response
+        Response::PublishersRanking.new(json_response_with_results_metadata).build_hash
       end
 
       def formatted_response
