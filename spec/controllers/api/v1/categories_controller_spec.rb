@@ -16,6 +16,7 @@ describe Api::V1::CategoriesController do
   let(:hash_response) { JSON.parse(response.body) }
 
   describe "top_apps" do
+
     context "performing a valid action" do
 
       before(:each) do
@@ -65,9 +66,40 @@ describe Api::V1::CategoriesController do
         end
       end
     end
+
+    context "performing an action with wrong format of params" do
+      context "category_id" do
+        before(:each) do
+          get :top_apps, category_id: "whatever", monetization: "free", format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter category_id is not a number .")
+        end
+      end
+
+      context "monetization" do
+        before(:each) do
+          get :top_apps, category_id: 3, monetization: 12345, format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter monetization 12345 is not a valid monetization type .")
+        end
+      end
+    end
   end
 
   describe "app_by_ranking_position" do
+
     context "performing a valid action" do
 
       before(:each) do
@@ -101,6 +133,7 @@ describe Api::V1::CategoriesController do
           expect(hash_response["error_message"]).to eq("Parameter category_id can't be blank .")
         end
       end
+
       context "without monetization" do
         before(:each) do
           get :app_by_ranking_position, category_id: 3, rank_position: 1, format: :json
@@ -114,10 +147,69 @@ describe Api::V1::CategoriesController do
           expect(hash_response["error_message"]).to eq("Parameter monetization can't be blank .")
         end
       end
+
+      context "without rank_position" do
+        before(:each) do
+          get :app_by_ranking_position, category_id: 3, monetization: "free", format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter rank_position is not a number .")
+        end
+      end
+    end
+
+    context "performing an action with wrong format of params" do
+      context "category_id" do
+        before(:each) do
+          get :app_by_ranking_position, category_id: "whatever", monetization: "free",rank_position: 1, format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter category_id is not a number .")
+        end
+      end
+
+      context "monetization" do
+        before(:each) do
+          get :app_by_ranking_position, category_id: 3, monetization: 12345, rank_position: 1, format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter monetization 12345 is not a valid monetization type .")
+        end
+      end
+
+      context "rank_position" do
+        before(:each) do
+          get :app_by_ranking_position, category_id: 3, monetization: "paid", rank_position: "hello", format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter rank_position is not a number .")
+        end
+      end
     end
   end
 
   describe "publishers_ranking" do
+
     context "performing a valid action" do
 
       before(:each) do
@@ -154,7 +246,7 @@ describe Api::V1::CategoriesController do
 
       context "without monetization" do
         before(:each) do
-          get :top_apps, category_id: 3, format: :json
+          get :publishers_ranking, category_id: 3, format: :json
         end
 
         it "returns an http code error" do
@@ -164,7 +256,37 @@ describe Api::V1::CategoriesController do
         it "contains an error message" do
           expect(hash_response["error_message"]).to eq("Parameter monetization can't be blank .")
         end
-      end      
+      end
+    end
+
+    context "performing an action with wrong format of params" do
+      context "category_id" do
+        before(:each) do
+          get :publishers_ranking, category_id: "whatever", monetization: "free", format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter category_id is not a number .")
+        end
+      end
+
+      context "monetization" do
+        before(:each) do
+          get :publishers_ranking, category_id: 3, monetization: 12345, format: :json
+        end
+
+        it "returns an http code error" do
+          expect(response.status).to eq 400
+        end
+
+        it "contains an error message" do
+          expect(hash_response["error_message"]).to eq("Parameter monetization 12345 is not a valid monetization type .")
+        end
+      end
     end
   end
 
