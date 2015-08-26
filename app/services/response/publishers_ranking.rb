@@ -20,13 +20,13 @@ module Response
         results.each do |result|
           publisher          = publishers_hash[ result[:metadata][:publisher_id] ] || {}
           if publisher.empty?
-            publisher_metadata = result[:metadata]
+            publisher_metadata         = result[:metadata]
             publisher[:app_names]      = [ publisher_metadata[:app_name] ]
             publisher[:publisher_id]   = publisher_metadata[:publisher_id]
             publisher[:publisher_name] = publisher_metadata[:publisher_name]
             publisher[:number_of_apps] = 1
           else
-            publisher[:app_names] << result[:metadata][:app_name]
+            publisher[:app_names]      << result[:metadata][:app_name]
             publisher[:number_of_apps] += 1
           end
             publishers_hash[ result[:metadata][:publisher_id]] = publisher

@@ -3,8 +3,14 @@ require "rails_helper"
 describe PublishersRanking do
 
   describe "performing a successfull api request" do
-    subject { PublishersRanking.new(category_id: 1234, monetization: "free") }
 
+    subject { PublishersRanking.new(category_id: 1234, monetization: "free") }
+    #
+    # The file has 2 responses for the same publisher_id and one for a different publisher_id
+    # just for make it easier to test, knowing that the output of apple_lookup_build_response
+    # would be two elements in the array. It is deeply tested on
+    # spec/services/response/publishers_ranking_spec.rb , where all this "magic" happens
+    #
     let(:apple_store_api_response)   { File.read("spec/fixtures/apple_store_api_raw_response.json") }
 
     let(:apple_lookup_api_response)   { File.read("spec/fixtures/apple_lookup_api_multiple_response.json") }
@@ -23,7 +29,7 @@ describe PublishersRanking do
         expect(subject.perform_request.count).to eq 2
       end
 
-      it "should be ordered" do
+      it "it is be ordered" do
         expect(subject.perform_request.first[:ranking_position]).to be < subject.perform_request.last[:ranking_position]
       end 
     end
