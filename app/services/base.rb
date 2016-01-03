@@ -28,11 +28,7 @@ class Base
     #
     #
     def execute_api_calls_and_evalute_responses
-      if apple_store_response.valid?
-        evaluate_apple_lookup_api_call
-      else
-        apple_store_response.error
-      end
+      apple_store_response.valid? ? evaluate_apple_lookup_api_call : apple_store_response.error
     end
 
     def apple_store_response
@@ -52,11 +48,7 @@ class Base
     #
     #
     def evaluate_apple_lookup_api_call
-      if apple_lookup_response.valid?
-        apple_lookup_response.build_top_apps_response
-      else
-        apple_lookup_response.error
-      end
+      apple_lookup_response.valid? ? apple_lookup_response.build_top_apps_response : apple_lookup_response.error
     end
 
     def apple_lookup_response
