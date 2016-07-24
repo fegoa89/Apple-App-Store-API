@@ -34,4 +34,35 @@ describe PublishersRanking do
       end 
     end
   end
+
+  context "performing an unsuccessfull request" do
+
+    let(:apple_store_api_response_error)   { File.read("spec/fixtures/apple_store_api_xml_error") }
+
+    let(:apple_store_api_response)   { File.read("spec/fixtures/apple_store_api_raw_response.json") }
+
+    context "when the apple_store_api response is a failure" do
+
+      before(:each) do
+        stub_request(:get, %r{https://itunes\.apple\.com/WebObjects/MZStore\.woa.*/}).to_return( body: apple_store_api_response_error )
+        stub_request(:get, %r{https://itunes\.apple\.com/lookup\.*}).to_return( body: [] )
+      end
+
+      it "returns a hash with a error" do
+        expect(subject.perform_request).to eq( { error: 400, message: "Bad Request" } )
+      end
+    end
+
+    context "when the apple_store_api response is a valid but apple_lookup_api response is a failure" do
+
+      before(:each) do
+        stub_request(:get, %r{https://itunes\.apple\.com/WebObjects/MZStore\.woa.*/}).to_return( body: apple_store_api_response )
+        PublishersRanking.any_instance.should_receive(:get_app_metadata).and_return(RestClient::BadRequest.new)
+      end
+
+      it "returns a hash with a error" do
+        expect(subject.perform_request).to eq( { error: 400, message: "Bad Request" } )
+      end
+    end
+  end
 end
